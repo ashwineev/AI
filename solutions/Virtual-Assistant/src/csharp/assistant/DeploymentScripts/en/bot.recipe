@@ -21,6 +21,12 @@
     },
     {
       "type": "luis",
+      "id": "phone",
+      "name": "Phone",
+      "luPath": "..\\skills\\phoneskill\\phoneskill\\CognitiveModels\\LUIS\\en\\phone.lu"
+    },
+    {
+      "type": "luis",
       "id": "todo",
       "name": "ToDo",
       "luPath": "..\\skills\\todoskill\\todoskill\\CognitiveModels\\LUIS\\en\\todo.lu"

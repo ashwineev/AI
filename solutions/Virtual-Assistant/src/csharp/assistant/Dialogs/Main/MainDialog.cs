@@ -188,6 +188,7 @@ namespace VirtualAssistant.Dialogs.Main
 
                 case Dispatch.Intent.l_Calendar:
                 case Dispatch.Intent.l_Email:
+                case Dispatch.Intent.l_Phone:
                 case Dispatch.Intent.l_ToDo:
                 case Dispatch.Intent.l_PointOfInterest:
                     {

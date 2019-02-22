@@ -57,6 +57,9 @@ $TaskContentPattern:simple
 $KEYWORD:simple
 $ADDRESS:simple
 
+# l_Phone
+- [l_Phone](../../../../skills/phoneskill/phoneskill/CognitiveModels/LUIS/en/phone.lu#OutgoingCall)
+
 # q_FAQ
 - [q_FAQ](../../QnA/en/faq.lu#?)
 

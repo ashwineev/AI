@@ -10,38 +10,33 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.AI.Luis;
 namespace Luis
 {
-    public class Dispatch: IRecognizerConvert
+    public class PhoneLU: IRecognizerConvert
     {
         public string Text;
         public string AlteredText;
         public enum Intent {
-            l_General, 
-            l_Calendar, 
-            l_Email, 
-            l_ToDo, 
-            l_PointOfInterest, 
-            l_Phone, 
-            q_FAQ, 
-            q_Chitchat, 
-            None
+            None, 
+            OutgoingCall
         };
         public Dictionary<Intent, IntentScore> Intents;
 
         public class _Entities
         {
             // Simple entities
-            public string[] ShopContent;
-            public string[] TaskContentPattern;
-            public string[] KEYWORD;
-            public string[] ADDRESS;
+            public string[] contactName;
+
+            // Built-in entities
+            public double[] number;
+
+            // Lists
+            public string[][] contactRelation;
 
             // Instance
             public class _Instance
             {
-                public InstanceData[] ShopContent;
-                public InstanceData[] TaskContentPattern;
-                public InstanceData[] KEYWORD;
-                public InstanceData[] ADDRESS;
+                public InstanceData[] contactName;
+                public InstanceData[] number;
+                public InstanceData[] contactRelation;
             }
             [JsonProperty("$instance")]
             public _Instance _instance;
@@ -53,7 +48,7 @@ namespace Luis
 
         public void Convert(dynamic result)
         {
-            var app = JsonConvert.DeserializeObject<Dispatch>(JsonConvert.SerializeObject(result));
+            var app = JsonConvert.DeserializeObject<PhoneLU>(JsonConvert.SerializeObject(result));
             Text = app.Text;
             AlteredText = app.AlteredText;
             Intents = app.Intents;

@@ -93,6 +93,7 @@
     <ProjectReference Include="..\microsoft.bot.solutions\Microsoft.Bot.Solutions.csproj" />
     <ProjectReference Include="..\skills\calendarskill\calendarskill\CalendarSkill.csproj" />
     <ProjectReference Include="..\skills\emailskill\emailskill\EmailSkill.csproj" />
+    <ProjectReference Include="..\skills\phoneskill\phoneskill\PhoneSkill.csproj" />
     <ProjectReference Include="..\skills\pointofinterestskill\pointofinterestskill\PointOfInterestSkill.csproj" />
     <ProjectReference Include="..\skills\todoskill\todoskill\ToDoSkill.csproj" />
   </ItemGroup>
