@@ -11,8 +11,21 @@ namespace PhoneSkill
             Clear();
         }
 
-        // TODO What is this? Do we need it?
+        /// <summary>
+        /// Gets the authentication token needed for getting the user's contact list.
+        /// </summary>
+        /// <value>
+        /// The authentication token needed for getting the user's contact list.
+        /// </value>
         public string Token { get; internal set; }
+
+        /// <summary>
+        /// Gets the source of the user's contact list.
+        /// </summary>
+        /// <value>
+        /// The source of the user's contact list.
+        /// </value>
+        public ContactSource? SourceOfContacts { get; internal set; }
 
         /// <summary>
         /// Gets or sets the most recent LUIS result.
@@ -33,6 +46,7 @@ namespace PhoneSkill
         public void Clear()
         {
             Token = string.Empty;
+            SourceOfContacts = null;
             LuisResult = new PhoneLU();
             ContactResult = new ContactSearchResult();
         }

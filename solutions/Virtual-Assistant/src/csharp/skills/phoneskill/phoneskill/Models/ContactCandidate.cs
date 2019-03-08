@@ -6,7 +6,7 @@ namespace PhoneSkill.Models
     /// <summary>
     /// A contact from the user's contact list that serves as a candidate for who to call.
     /// </summary>
-    public class ContactCandidate : IEquatable<ContactCandidate>
+    public class ContactCandidate : ICloneable, IEquatable<ContactCandidate>
     {
         /// <summary>
         /// Gets or sets the ID of the corresponding contact in the user's contact list (optional).
@@ -33,6 +33,22 @@ namespace PhoneSkill.Models
         /// The phone numbers of the contact.
         /// </value>
         public IList<PhoneNumber> PhoneNumbers { get; set; } = new List<PhoneNumber>();
+
+        public object Clone()
+        {
+            ContactCandidate clone = new ContactCandidate
+            {
+                CorrespondingId = CorrespondingId,
+                Name = Name,
+            };
+
+            foreach (PhoneNumber phoneNumber in PhoneNumbers)
+            {
+                clone.PhoneNumbers.Add((PhoneNumber)phoneNumber.Clone());
+            }
+
+            return clone;
+        }
 
         public override bool Equals(object obj)
         {

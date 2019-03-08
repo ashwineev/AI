@@ -6,7 +6,7 @@ namespace PhoneSkill.Models
     /// <summary>
     /// A phone number of one of the user's contacts.
     /// </summary>
-    public class PhoneNumber : IEquatable<PhoneNumber>
+    public class PhoneNumber : ICloneable, IEquatable<PhoneNumber>
     {
         /// <summary>
         /// Gets or sets the literal phone number.
@@ -23,6 +23,15 @@ namespace PhoneSkill.Models
         /// The type of the phone number.
         /// </value>
         public PhoneNumberType Type { get; set; } = new PhoneNumberType();
+
+        public object Clone()
+        {
+            return new PhoneNumber
+            {
+                Number = Number,
+                Type = (PhoneNumberType)Type.Clone(),
+            };
+        }
 
         public override bool Equals(object obj)
         {

@@ -7,7 +7,7 @@ namespace PhoneSkill.Models
     /// The type or label of a phone number.
     /// This can be a standard type (HOME, BUSINESS, or MOBILE) or a free-form string label (or both if the free-form string label can be mapped to a standard type).
     /// </summary>
-    public class PhoneNumberType : IEquatable<PhoneNumberType>
+    public class PhoneNumberType : ICloneable, IEquatable<PhoneNumberType>
     {
         /// <summary>
         /// Commonly used standard types of phone numbers.
@@ -50,6 +50,15 @@ namespace PhoneSkill.Models
         /// The free-form label for the phone number.
         /// </value>
         public string FreeForm { get; set; } = string.Empty;
+
+        public object Clone()
+        {
+            return new PhoneNumberType
+            {
+                Standardized = Standardized,
+                FreeForm = FreeForm,
+            };
+        }
 
         public override bool Equals(object obj)
         {

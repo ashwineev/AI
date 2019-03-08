@@ -1,6 +1,6 @@
 ﻿namespace PhoneSkill.Dialogs.Shared.DialogOptions
 {
-    public class SkillTemplateDialogOptions
+    public class PhoneSkillDialogOptions
     {
         public bool SkillMode { get; set; }
     }

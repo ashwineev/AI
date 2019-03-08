@@ -17,6 +17,7 @@ using Microsoft.Bot.Solutions.Util;
 using Newtonsoft.Json.Linq;
 using PhoneSkill.Dialogs.Shared.DialogOptions;
 using PhoneSkill.Dialogs.Shared.Resources;
+using PhoneSkill.Models;
 using PhoneSkill.ServiceClients;
 
 namespace PhoneSkill.Dialogs.Shared
@@ -40,14 +41,13 @@ namespace PhoneSkill.Dialogs.Shared
             ServiceManager = serviceManager;
             TelemetryClient = telemetryClient;
 
-            // NOTE: Uncomment the following if your skill requires authentication
-            // if (!Services.AuthenticationConnections.Any())
-            // {
-            //     throw new Exception("You must configure an authentication connection in your bot file before using this component.");
-            // }
-            //
-            // AddDialog(new EventPrompt(DialogIds.SkillModeAuth, "tokens/response", TokenResponseValidator));
-            // AddDialog(new MultiProviderAuthDialog(services));
+            if (!Services.AuthenticationConnections.Any())
+            {
+                throw new Exception("You must configure an authentication connection in your bot file before using this component.");
+            }
+
+            AddDialog(new EventPrompt(DialogIds.SkillModeAuth, "tokens/response", TokenResponseValidator));
+            AddDialog(new MultiProviderAuthDialog(services));
         }
 
         protected SkillConfigurationBase Services { get; set; }
@@ -77,7 +77,7 @@ namespace PhoneSkill.Dialogs.Shared
         {
             try
             {
-                var skillOptions = (SkillTemplateDialogOptions)sc.Options;
+                var skillOptions = (PhoneSkillDialogOptions)sc.Options;
 
                 // If in Skill mode we ask the calling Bot for the token
                 if (skillOptions != null && skillOptions.SkillMode)
@@ -111,7 +111,7 @@ namespace PhoneSkill.Dialogs.Shared
             {
                 // When the user authenticates interactively we pass on the tokens/Response event which surfaces as a JObject
                 // When the token is cached we get a TokenResponse object.
-                var skillOptions = (SkillTemplateDialogOptions)sc.Options;
+                var skillOptions = (PhoneSkillDialogOptions)sc.Options;
                 ProviderTokenResponse providerTokenResponse;
                 if (skillOptions != null && skillOptions.SkillMode)
                 {
@@ -135,6 +135,19 @@ namespace PhoneSkill.Dialogs.Shared
                 {
                     var state = await ConversationStateAccessor.GetAsync(sc.Context);
                     state.Token = providerTokenResponse.TokenResponse.Token;
+
+                    var provider = providerTokenResponse.AuthenticationProvider;
+                    switch (provider)
+                    {
+                        case OAuthProvider.AzureAD:
+                            state.SourceOfContacts = ContactSource.Microsoft;
+                            break;
+                        case OAuthProvider.Google:
+                            state.SourceOfContacts = ContactSource.Google;
+                            break;
+                        default:
+                            throw new Exception($"The authentication provider \"{provider.ToString()}\" is not supported by the Phone skill.");
+                    }
                 }
 
                 return await sc.NextAsync();

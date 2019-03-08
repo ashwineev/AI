@@ -51,7 +51,7 @@ namespace PhoneSkill
             _userState = userState ?? throw new ArgumentNullException(nameof(userState));
             _conversationState = conversationState ?? throw new ArgumentNullException(nameof(conversationState));
             _telemetryClient = telemetryClient ?? throw new ArgumentNullException(nameof(telemetryClient));
-            _serviceManager = serviceManager ?? new ServiceManager();
+            _serviceManager = serviceManager ?? new ServiceManager(services);
 
             if (responseManager == null)
             {

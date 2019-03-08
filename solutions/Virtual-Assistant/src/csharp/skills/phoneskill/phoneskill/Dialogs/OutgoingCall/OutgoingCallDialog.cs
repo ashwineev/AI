@@ -25,9 +25,8 @@ namespace PhoneSkill.Dialogs.OutgoingCall
         {
             var outgoingCall = new WaterfallStep[]
             {
-                // NOTE: Uncomment these lines to include authentication steps to this dialog
-                // GetAuthToken,
-                // AfterGetAuthToken,
+                GetAuthToken,
+                AfterGetAuthToken,
                 PromptForRecipient,
                 AskToSelectContact,
                 AskToSelectPhoneNumber,

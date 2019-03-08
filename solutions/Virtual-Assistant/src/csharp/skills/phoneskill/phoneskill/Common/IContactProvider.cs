@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using PhoneSkill.Models;
 
 namespace PhoneSkill.Common
@@ -12,6 +13,6 @@ namespace PhoneSkill.Common
         /// Get all contacts in the user's contact list.
         /// </summary>
         /// <returns>All contacts in the user's contact list.</returns>
-        IList<ContactCandidate> GetContacts();
+        Task<IList<ContactCandidate>> GetContacts();
     }
 }

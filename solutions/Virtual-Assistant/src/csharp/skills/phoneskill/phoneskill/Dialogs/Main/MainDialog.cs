@@ -84,7 +84,7 @@ namespace PhoneSkill.Dialogs.Main
             }
             else
             {
-                var skillOptions = new SkillTemplateDialogOptions
+                var skillOptions = new PhoneSkillDialogOptions
                 {
                     SkillMode = _skillMode,
                 };

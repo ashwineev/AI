@@ -22,7 +22,7 @@ namespace PhoneSkill.Common
         /// Filters the user's contact list repeatedly based on the user's input to determine the right contact and phone number to call.
         /// </summary>
         /// <param name="state">The current conversation state. This will be modified.</param>
-        public void Filter(SkillConversationState state)
+        public async void Filter(SkillConversationState state)
         {
             var entities = state.LuisResult.Entities;
             var entitiesForSearch = new List<InstanceData>();
@@ -34,12 +34,11 @@ namespace PhoneSkill.Common
             IList<ContactCandidate> contacts;
             if (state.ContactResult.Matches.Any())
             {
-                contacts = new List<ContactCandidate>();
-                // TODO contacts = state.ContactResult.Matches;
+                contacts = state.ContactResult.Matches;
             }
             else
             {
-                contacts = contactProvider.GetContacts();
+                contacts = await contactProvider.GetContacts();
             }
 
             // TODO Adjust max number of returned contacts?
@@ -54,7 +53,7 @@ namespace PhoneSkill.Common
             // TODO Filter by requested phone number type.
 
             state.ContactResult.SearchQuery = searchQuery;
-            // TODO state.ContactResult.Matches = matches;
+            state.ContactResult.Matches = matches;
         }
 
         private List<InstanceData> SortAndRemoveOverlappingEntities(List<InstanceData> entities)
