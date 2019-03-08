@@ -31,7 +31,7 @@ namespace PhoneSkill.Models
         /// The matching contacts, sorted from best to worst match.
         /// If there are multiple matches, the user will be asked to choose one and this list will be updated with their choice.
         /// </value>
-        public IList<ContactMatch> Matches { get; set; } = new List<ContactMatch>();
+        public IList<ContactCandidate> Matches { get; set; } = new List<ContactCandidate>();
 
         public override bool Equals(object obj)
         {
@@ -43,7 +43,7 @@ namespace PhoneSkill.Models
             return other != null &&
                    SearchQuery == other.SearchQuery &&
                    EqualityComparer<PhoneNumberType>.Default.Equals(RequestedPhoneNumberType, other.RequestedPhoneNumberType) &&
-                   EqualityComparer<IList<ContactMatch>>.Default.Equals(Matches, other.Matches);
+                   EqualityComparer<IList<ContactCandidate>>.Default.Equals(Matches, other.Matches);
         }
 
         public override int GetHashCode()
