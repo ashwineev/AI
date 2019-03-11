@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using PhoneSkill.Common;
 
 namespace PhoneSkill.Models
 {
@@ -60,7 +62,7 @@ namespace PhoneSkill.Models
             return other != null &&
                    CorrespondingId == other.CorrespondingId &&
                    Name == other.Name &&
-                   EqualityComparer<IList<PhoneNumber>>.Default.Equals(PhoneNumbers, other.PhoneNumbers);
+                   (PhoneNumbers == null ? other.PhoneNumbers == null : Enumerable.SequenceEqual(PhoneNumbers, other.PhoneNumbers));
         }
 
         public override int GetHashCode()
@@ -70,7 +72,7 @@ namespace PhoneSkill.Models
 
         public override string ToString()
         {
-            return $"ContactCandidate{{CorrespondingId={CorrespondingId}, Name={Name}, PhoneNumbers={PhoneNumbers}}}";
+            return $"ContactCandidate{{CorrespondingId={CorrespondingId}, Name={Name}, PhoneNumbers={PhoneNumbers.ToPrettyString()}}}";
         }
     }
 }

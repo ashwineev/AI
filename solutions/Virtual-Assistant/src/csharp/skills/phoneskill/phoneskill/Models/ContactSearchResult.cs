@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using PhoneSkill.Common;
 
 namespace PhoneSkill.Models
 {
@@ -43,7 +45,7 @@ namespace PhoneSkill.Models
             return other != null &&
                    SearchQuery == other.SearchQuery &&
                    EqualityComparer<PhoneNumberType>.Default.Equals(RequestedPhoneNumberType, other.RequestedPhoneNumberType) &&
-                   EqualityComparer<IList<ContactCandidate>>.Default.Equals(Matches, other.Matches);
+                   (Matches == null ? other.Matches == null : Enumerable.SequenceEqual(Matches, other.Matches));
         }
 
         public override int GetHashCode()
@@ -53,7 +55,7 @@ namespace PhoneSkill.Models
 
         public override string ToString()
         {
-            return $"ContactSearchResult{{SearchQuery={SearchQuery}, RequestedPhoneNumberType={RequestedPhoneNumberType}, Matches={Matches}}}";
+            return $"ContactSearchResult{{SearchQuery={SearchQuery}, RequestedPhoneNumberType={RequestedPhoneNumberType}, Matches={Matches.ToPrettyString()}}}";
         }
     }
 }
