@@ -25,18 +25,22 @@ namespace Luis
             // Simple entities
             public string[] contactName;
 
-            // Built-in entities
-            public double[] number;
-
             // Lists
             public string[][] contactRelation;
+            public string[][] phoneNumberType;
+
+            // Regex entities
+            public string[] phoneNumber;
+            public string[] phoneNumberSpelledOut;
 
             // Instance
             public class _Instance
             {
                 public InstanceData[] contactName;
-                public InstanceData[] number;
                 public InstanceData[] contactRelation;
+                public InstanceData[] phoneNumberType;
+                public InstanceData[] phoneNumber;
+                public InstanceData[] phoneNumberSpelledOut;
             }
             [JsonProperty("$instance")]
             public _Instance _instance;
