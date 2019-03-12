@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
@@ -6,6 +7,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Solutions.Responses;
 using Microsoft.Bot.Solutions.Skills;
+using PhoneSkill.Common;
 using PhoneSkill.Dialogs.OutgoingCall.Resources;
 using PhoneSkill.Dialogs.Shared;
 using PhoneSkill.ServiceClients;
@@ -14,6 +16,8 @@ namespace PhoneSkill.Dialogs.OutgoingCall
 {
     public class OutgoingCallDialog : SkillDialogBase
     {
+        private ContactFilter contactFilter;
+
         public OutgoingCallDialog(
             SkillConfigurationBase services,
             ResponseManager responseManager,
@@ -39,13 +43,20 @@ namespace PhoneSkill.Dialogs.OutgoingCall
             AddDialog(new ChoicePrompt(DialogIds.PhoneNumberSelection, ValidatePhoneNumberChoice));
 
             InitialDialogId = nameof(OutgoingCallDialog);
+
+            contactFilter = new ContactFilter();
         }
 
         private async Task<DialogTurnResult> PromptForRecipient(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             var state = await ConversationStateAccessor.GetAsync(stepContext.Context);
-            var intent = state.LuisResult.TopIntent().intent;
-            var entities = state.LuisResult.Entities;
+            var contactProvider = GetContactProvider(state);
+            contactFilter.Filter(state, contactProvider);
+
+            if (state.ContactResult.Matches.Count != 0)
+            {
+                return await stepContext.NextAsync();
+            }
 
             var prompt = ResponseManager.GetResponse(OutgoingCallResponses.RecipientPrompt);
             return await stepContext.PromptAsync(DialogIds.RecipientPrompt, new PromptOptions { Prompt = prompt });
@@ -86,6 +97,17 @@ namespace PhoneSkill.Dialogs.OutgoingCall
             state.Clear();
 
             return await stepContext.EndDialogAsync();
+        }
+
+        private IContactProvider GetContactProvider(SkillConversationState state)
+        {
+            if (state.SourceOfContacts == null)
+            {
+                // TODO Better error message to tell the bot developer where to specify the source.
+                throw new Exception("Cannot retrieve contact list because no contact source specified.");
+            }
+
+            return ServiceManager.GetContactProvider(state.Token, state.SourceOfContacts.Value);
         }
 
         private class DialogIds

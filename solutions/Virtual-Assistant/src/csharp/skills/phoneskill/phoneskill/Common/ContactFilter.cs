@@ -11,18 +11,12 @@ namespace PhoneSkill.Common
     /// </summary>
     public class ContactFilter
     {
-        private IContactProvider contactProvider;
-
-        public ContactFilter(IContactProvider contactProvider)
-        {
-            this.contactProvider = contactProvider;
-        }
-
         /// <summary>
         /// Filters the user's contact list repeatedly based on the user's input to determine the right contact and phone number to call.
         /// </summary>
         /// <param name="state">The current conversation state. This will be modified.</param>
-        public async void Filter(SkillConversationState state)
+        /// <param name="contactProvider">The provider for the user's contact list.</param>
+        public async void Filter(SkillConversationState state, IContactProvider contactProvider)
         {
             var entities = state.LuisResult.Entities;
             var entitiesForSearch = new List<InstanceData>();
