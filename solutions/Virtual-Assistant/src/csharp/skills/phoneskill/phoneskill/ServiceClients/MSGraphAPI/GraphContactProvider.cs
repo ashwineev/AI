@@ -217,7 +217,7 @@ namespace PhoneSkill.ServiceClients.MSGraphAPI
         private bool FilterDisplayName(string displayName)
         {
             // Filter out conference rooms.
-            return !string.IsNullOrEmpty(displayName) && !displayName.StartsWith("Conf Room");
+            return !string.IsNullOrEmpty(displayName) && !displayName.ToLowerInvariant().StartsWith("conf room");
         }
 
         private IList<PhoneNumber> MakePhoneNumbers(IEnumerable<string> numbers, PhoneNumberType.StandardType type)
