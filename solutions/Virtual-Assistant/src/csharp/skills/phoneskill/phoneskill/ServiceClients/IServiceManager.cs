@@ -1,5 +1,5 @@
 ﻿using PhoneSkill.Common;
-using PhoneSkill.Models;
+using PhoneSkill.Model;
 
 namespace PhoneSkill.ServiceClients
 {

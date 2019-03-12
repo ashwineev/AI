@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PhoneSkill.Common;
 
-namespace PhoneSkill.Models
+namespace PhoneSkill.Model
 {
     /// <summary>
     /// The result of a search for a contact in the user's contact list.

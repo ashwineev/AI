@@ -4,7 +4,7 @@
 using System;
 using Microsoft.Bot.Solutions.Skills;
 using PhoneSkill.Common;
-using PhoneSkill.Models;
+using PhoneSkill.Model;
 using PhoneSkill.ServiceClients.GoogleAPI;
 using PhoneSkill.ServiceClients.MSGraphAPI;
 

@@ -1,4 +1,4 @@
-﻿namespace PhoneSkill.Models
+﻿namespace PhoneSkill.Model
 {
     /// <summary>
     /// Where the skill gets the user's contacts from.

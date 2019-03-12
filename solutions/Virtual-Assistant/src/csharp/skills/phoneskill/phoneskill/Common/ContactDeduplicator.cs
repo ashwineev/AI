@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PhoneSkill.Models;
+using PhoneSkill.Model;
 
 namespace PhoneSkill.Common
 {

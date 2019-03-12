@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using PhoneSkill.Models;
+using PhoneSkill.Model;
 
 namespace PhoneSkill.Common
 {

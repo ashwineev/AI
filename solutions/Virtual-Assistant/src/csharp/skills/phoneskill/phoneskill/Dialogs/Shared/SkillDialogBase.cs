@@ -17,7 +17,7 @@ using Microsoft.Bot.Solutions.Util;
 using Newtonsoft.Json.Linq;
 using PhoneSkill.Dialogs.Shared.DialogOptions;
 using PhoneSkill.Dialogs.Shared.Resources;
-using PhoneSkill.Models;
+using PhoneSkill.Model;
 using PhoneSkill.ServiceClients;
 
 namespace PhoneSkill.Dialogs.Shared

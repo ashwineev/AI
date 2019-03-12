@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PhoneSkill.Common;
-using PhoneSkill.Models;
+using PhoneSkill.Model;
 using System.Collections;
 using System.Collections.Generic;
 

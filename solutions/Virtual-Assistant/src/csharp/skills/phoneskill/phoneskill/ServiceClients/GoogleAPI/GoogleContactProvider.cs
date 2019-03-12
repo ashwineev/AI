@@ -9,9 +9,9 @@ using Google.Apis.People.v1.Data;
 using Google.Apis.Requests;
 using Google.Apis.Services;
 using PhoneSkill.Common;
-using PhoneSkill.Models;
+using PhoneSkill.Model;
 using GooglePhoneNumber = Google.Apis.People.v1.Data.PhoneNumber;
-using PhoneNumber = PhoneSkill.Models.PhoneNumber;
+using PhoneNumber = PhoneSkill.Model.PhoneNumber;
 
 namespace PhoneSkill.ServiceClients.GoogleAPI
 {

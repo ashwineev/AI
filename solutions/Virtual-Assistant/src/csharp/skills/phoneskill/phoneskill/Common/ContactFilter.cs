@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.Bot.Builder.AI.Luis;
 using Microsoft.PhoneticMatching.Matchers.ContactMatcher;
-using PhoneSkill.Models;
+using PhoneSkill.Model;
 
 namespace PhoneSkill.Common
 {

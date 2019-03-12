@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace PhoneSkill.Models
+namespace PhoneSkill.Model
 {
     /// <summary>
     /// The type or label of a phone number.

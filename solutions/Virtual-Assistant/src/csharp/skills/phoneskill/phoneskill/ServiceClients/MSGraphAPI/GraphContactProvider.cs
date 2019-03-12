@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Graph;
 using PhoneSkill.Common;
-using PhoneSkill.Models;
+using PhoneSkill.Model;
 
 namespace PhoneSkill.ServiceClients.MSGraphAPI
 {

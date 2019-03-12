@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PhoneSkill.Models
+namespace PhoneSkill.Model
 {
     /// <summary>
     /// A phone number of one of the user's contacts.

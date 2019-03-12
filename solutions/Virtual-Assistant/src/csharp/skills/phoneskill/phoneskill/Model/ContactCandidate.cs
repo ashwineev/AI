@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PhoneSkill.Common;
 
-namespace PhoneSkill.Models
+namespace PhoneSkill.Model
 {
     /// <summary>
     /// A contact from the user's contact list that serves as a candidate for who to call.
